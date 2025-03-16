@@ -9,9 +9,14 @@ HEIGHT = 600
 LINE_WIDTH = 15
 BOARD_ROWS = 3
 BOARD_COLS = 3
+CIRCLE_RADIOUS = 60
+CIRCLE_WIDTH = 15
+CROSS_WIDTH = 25
+SPACE = 55
 
 # colors
 RED = (255, 0, 0)
+GREEN = (0, 153, 0)
 BG_COLOR = (102, 178, 255)
 LINE_COLOR = (96, 96, 96)     # (23, 135, 135)
 
@@ -20,7 +25,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tic Tac Toe (PvP)')
 
 # Load and set the window icon
-icon = pygame.image.load(r'F:\ar_sayeem_github\gamelab\Tic-Tac-Toe\icon.png')  # Replace 'path' with desired icon file location
+icon = pygame.image.load(r'C:\Users\DarkBoyAR\Desktop\GitHub-sayeem-ar\gamelab\Tic-Tac-Toe\icon.png')  # Replace 'path' with desired icon file location
 pygame.display.set_icon(icon)
 
 screen.fill(BG_COLOR)
@@ -38,6 +43,17 @@ def draw_lines():
     # vertical
     pygame.draw.line(screen, LINE_COLOR, (200, 0), (200, 600), LINE_WIDTH)
     pygame.draw.line(screen, LINE_COLOR, (400, 0), (400, 600), LINE_WIDTH)
+
+def draw_figures():
+    for row in range(BOARD_ROWS):
+        for col in range(BOARD_COLS):
+            if board[row][col] == 1:    # Player 1
+                pygame.draw.circle(screen, RED, (int(col * 200 + 100), int(row * 200 + 100)), CIRCLE_RADIOUS, CIRCLE_WIDTH)
+                                                # 600//3 = 200 , 100 = 600//6
+            elif board[row][col] == 2:  # Player 2
+                pygame.draw.line(screen, GREEN, (col * 200 + SPACE, row * 200 + SPACE),       (col * 200 + 200 - SPACE, row * 200 + 200 - SPACE), CROSS_WIDTH)
+                pygame.draw.line(screen, GREEN, (col * 200 + SPACE, row * 200 + 200 - SPACE), (col * 200 + 200 - SPACE, row * 200 + SPACE), CROSS_WIDTH)
+
 
 def mark_square(row, col, player):
     board[row][col] = player
@@ -110,7 +126,9 @@ while True:
                     mark_square(clicked_row, clicked_col, 2)
                     player = 1
                 
-                print(board)
+                draw_figures()
+            
+                #print(board)
 
 
 
