@@ -18,6 +18,7 @@
     
             #     if check_win(player):
             #         game_over = True
+            #     player = player % 2 + 1
 
 
 
